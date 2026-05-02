@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurelle Création — Vous rendre encore plus belle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --yellow: #F5C842;
+      --yellow-light: #FDF3CC;
+      --white: #FAFAF8;
+      --black: #0D0D0D;
+      --gray: #6B6B6B;
+      --gray-light: #E8E8E5;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--black); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(250,250,248,0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--gray-light);
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 300;
+      letter-spacing: 0.1em; color: var(--black); text-decoration: none;
+    }
+    .nav-logo span { color: var(--yellow); }
+    .logo-img { 
+      height: 68px; width: auto; object-fit: contain; display: block;
+      border-radius: 50%;
+      filter: brightness(1.2);
+    }
+    .footer-logo .logo-img { 
+      height: 62px;
+      filter: brightness(0) invert(1) brightness(1.2);
+      border-radius: 50%;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--black); text-decoration: none;
+      position: relative; padding-bottom: 3px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--yellow); transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--black); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: var(--white); z-index: 99;
+      flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: 2.8rem; font-weight: 300;
+      color: var(--black); text-decoration: none; letter-spacing: 0.05em;
+    }
+    .mobile-menu a:hover { color: var(--yellow); }
+
+    /* ── HERO ── */
+    #accueil {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 4rem 5rem; position: relative; overflow: hidden;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gray); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--yellow); }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; max-width: 820px;
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s;
+    }
+    .hero-title em { font-style: italic; color: var(--yellow); }
+    .hero-subtitle {
+      margin-top: 2rem; font-size: 1rem; font-weight: 300; color: var(--gray);
+      max-width: 400px; line-height: 1.8;
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+    .hero-cta {
+      margin-top: 3rem; display: flex; gap: 2rem; align-items: center;
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.8s;
+    }
+    .btn-primary {
+      background: var(--black); color: var(--white);
+      padding: 1rem 2.5rem; font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 400; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none; transition: background 0.3s, color 0.3s;
+    }
+    .btn-primary:hover { background: var(--yellow); color: var(--black); }
+    .btn-secondary {
+      font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--black); text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary::after { content: '→'; transition: transform 0.3s; }
+    .btn-secondary:hover::after { transform: translateX(5px); }
+
+    .hero-deco {
+      position: absolute; right: 5rem; top: 50%; transform: translateY(-50%);
+      width: 300px; height: 400px;
+      opacity: 0; animation: fadeIn 1.2s ease forwards 1s;
+    }
+    .hero-deco-inner {
+      width: 100%; height: 100%; border: 1px solid var(--gray-light);
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-deco-inner::before { content: '✦'; font-size: 5rem; color: var(--yellow); opacity: 0.25; }
+    .hero-deco-inner::after { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(245,200,66,0.2); }
+
+    .thread-line {
+      position: absolute; bottom: 3rem; left: 4rem;
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gray);
+      opacity: 0; animation: fadeUp 0.8s ease forwards 1.2s;
+    }
+    .thread-line::before { content: ''; display: block; width: 50px; height: 1px; background: var(--gray-light); }
+
+    /* ── SECTIONS COMMONS ── */
+    section { padding: 7rem 4rem; }
+    .section-tag { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); font-weight: 500; margin-bottom: 0.8rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.15; }
+    .section-title em { font-style: italic; }
+    .divider { width: 3rem; height: 1px; background: var(--yellow); margin: 2rem 0; }
+
+    /* ── À PROPOS ── */
+    #apropos {
+      background: var(--black); color: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+    #apropos .section-title { color: var(--white); }
+    .apropos-text { font-size: 0.95rem; font-weight: 300; line-height: 1.9; color: rgba(255,255,255,0.65); }
+    .apropos-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+    .stat-number { font-family: var(--font-display); font-size: 3rem; font-weight: 300; color: var(--yellow); line-height: 1; }
+    .stat-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.4rem; }
+    .apropos-portrait {
+      width: 100%; aspect-ratio: 3/4; background: #1A1A1A;
+      position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .apropos-portrait::before { content: ''; position: absolute; inset: 20px; border: 1px solid rgba(245,200,66,0.15); }
+    .portrait-icon { font-size: 5rem; opacity: 0.12; }
+    .portrait-badge {
+      position: absolute; bottom: 2rem; right: -1rem;
+      background: var(--yellow); color: var(--black);
+      padding: 1rem 1.5rem; font-family: var(--font-display); font-size: 0.95rem; font-style: italic;
+    }
+
+    /* ── MAP ── */
+    #map-section { padding: 0; background: var(--black); }
+    .map-container { display: grid; grid-template-columns: 1fr 1.6fr; }
+    .map-info { background: var(--black); color: var(--white); padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .map-info .section-tag { color: var(--yellow); }
+    .map-info .section-title { color: var(--white); font-size: 2rem; }
+    .map-details { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .map-detail-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .map-icon {
+      width: 38px; height: 38px; background: rgba(245,200,66,0.08);
+      border: 1px solid rgba(245,200,66,0.2);
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0;
+    }
+    .map-detail-text { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .map-detail-text strong { color: var(--white); display: block; margin-bottom: 0.2rem; font-weight: 400; }
+    .map-iframe-wrap { height: 450px; overflow: hidden; }
+    .map-iframe-wrap iframe { width: 100%; height: 100%; border: none; filter: grayscale(20%) contrast(1.05); }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .service-card {
+      background: var(--white); border: 1px solid var(--gray-light);
+      padding: 2.5rem 2rem; transition: all 0.4s; cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px; background: var(--yellow); transition: width 0.4s;
+    }
+    .service-card:hover { background: var(--black); color: var(--white); }
+    .service-card:hover::before { width: 100%; }
+    .service-number { font-family: var(--font-display); font-size: 3.5rem; font-weight: 300; color: var(--gray-light); line-height: 1; margin-bottom: 1.5rem; transition: color 0.4s; }
+    .service-card:hover .service-number { color: rgba(245,200,66,0.15); }
+    .service-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.75rem; }
+    .service-desc { font-size: 0.85rem; font-weight: 300; line-height: 1.75; color: var(--gray); transition: color 0.4s; }
+    .service-card:hover .service-desc { color: rgba(255,255,255,0.55); }
+    .service-tag { display: inline-block; margin-top: 1.5rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); font-weight: 500; }
+
+    /* ── RÉALISATIONS ── */
+    #realisations { background: var(--white); padding-top: 0; }
+    .realisations-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .filter-tabs { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .filter-tab {
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400;
+      cursor: pointer; padding-bottom: 4px; border: none; border-bottom: 1px solid transparent;
+      color: var(--gray); transition: all 0.3s; background: none; font-family: var(--font-body);
+    }
+    .filter-tab.active, .filter-tab:hover { color: var(--black); border-bottom-color: var(--yellow); }
+
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: auto; gap: 0.75rem;
+    }
+    .portfolio-item { position: relative; overflow: hidden; cursor: pointer; background: #F0EDE8; transition: opacity 0.4s, transform 0.4s; }
+    .portfolio-item:nth-child(1) { grid-column: 1/6; height: 420px; }
+    .portfolio-item:nth-child(2) { grid-column: 6/10; height: 200px; }
+    .portfolio-item:nth-child(3) { grid-column: 10/13; height: 200px; }
+    .portfolio-item:nth-child(4) { grid-column: 6/9; height: 205px; }
+    .portfolio-item:nth-child(5) { grid-column: 9/13; height: 205px; }
+    .portfolio-item:nth-child(6) { grid-column: 1/5; height: 200px; }
+    .portfolio-item:nth-child(7) { grid-column: 5/9; height: 200px; }
+    .portfolio-item:nth-child(8) { grid-column: 9/13; height: 200px; }
+
+    .portfolio-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(0,0,0,0.1); transition: transform 0.6s ease; }
+    .portfolio-overlay {
+      position: absolute; inset: 0; background: rgba(13,13,13,0.72);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.5rem; opacity: 0; transition: opacity 0.4s;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-item:hover .portfolio-img { transform: scale(1.06); }
+    .portfolio-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--white); font-style: italic; }
+    .portfolio-cat { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--yellow); margin-top: 0.3rem; }
+
+    .ph-1 { background: linear-gradient(135deg,#F0EDE8,#E8E2D9); }
+    .ph-2 { background: linear-gradient(135deg,#EDE8E0,#E0D8CC); }
+    .ph-3 { background: linear-gradient(135deg,#E8E4DC,#DDD6C8); }
+    .ph-4 { background: linear-gradient(135deg,#F5F1EB,#EBE5D8); }
+    .ph-5 { background: linear-gradient(135deg,#E4E0D8,#D8D0C4); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
+    .contact-info-title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.2; margin-bottom: 1rem; }
+    .contact-info-title em { font-style: italic; color: var(--yellow); }
+    .contact-details { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .contact-icon { width: 40px; height: 40px; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-text strong { display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.2rem; font-weight: 500; }
+    .contact-text span { font-size: 0.9rem; color: var(--gray); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 1rem 0; border: none; border-bottom: 1px solid var(--gray-light);
+      background: transparent; font-family: var(--font-body); font-size: 0.95rem;
+      color: var(--black); outline: none; transition: border-color 0.3s; resize: none; -webkit-appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-bottom-color: var(--yellow); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .btn-submit {
+      margin-top: 0.5rem; background: var(--black); color: var(--white); border: none;
+      padding: 1.2rem 3rem; font-family: var(--font-body); font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, color 0.3s; align-self: flex-start;
+    }
+    .btn-submit:hover { background: var(--yellow); color: var(--black); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); color: var(--white); padding: 2.5rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 300; letter-spacing: 0.1em; }
+    .footer-logo span { color: var(--yellow); }
+    .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
+    .footer-social { display: flex; gap: 1.5rem; }
+    .footer-social a { font-size: 1.3rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.3s; display: flex; align-items: center; justify-content: center; }
+    .footer-social a:hover { color: var(--yellow); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity 0.85s ease, transform 0.85s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay:0.12s; }
+    .reveal-delay-2 { transition-delay:0.24s; }
+    .reveal-delay-3 { transition-delay:0.36s; }
+    .reveal-delay-4 { transition-delay:0.48s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 1.5rem 2rem; }
+      section { padding: 5rem 2rem; }
+      #accueil { padding: 7rem 2rem 4rem; }
+      .hero-deco { display: none; }
+      .services-grid { grid-template-columns: repeat(2,1fr); }
+      #apropos { grid-template-columns: 1fr; gap: 3rem; }
+      .apropos-portrait { max-height: 320px; }
+      #contact { grid-template-columns: 1fr; gap: 4rem; }
+      .map-container { grid-template-columns: 1fr; }
+      .map-iframe-wrap { height: 300px; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .portfolio-item:nth-child(1) { grid-column: 1/-1; height: 260px; }
+      .portfolio-item:nth-child(2) { grid-column: 1/7; height: 170px; }
+      .portfolio-item:nth-child(3) { grid-column: 7/-1; height: 170px; }
+      .portfolio-item:nth-child(4) { grid-column: 1/7; height: 170px; }
+      .portfolio-item:nth-child(5) { grid-column: 7/-1; height: 170px; }
+      .portfolio-item:nth-child(6) { grid-column: 1/-1; height: 170px; }
+      .portfolio-item:nth-child(7),
+      .portfolio-item:nth-child(8) { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .services-header, .realisations-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .thread-line { display: none; }
+      .map-info { padding: 3rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav id="navbar">
+  <a href="#accueil" class="nav-logo"><img src="Aurelle_couture.jpeg" class="logo-img"></a>
+  <ul class="nav-links">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#accueil" onclick="closeMenu()">Accueil</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#realisations" onclick="closeMenu()">Réalisations</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section id="accueil">
+  <div class="hero-eyebrow">Couture & Création sur Mesure — Abidjan</div>
+  <h1 class="hero-title">L'art de<br><em>sublimer</em><br>chaque tissu</h1>
+  <p class="hero-subtitle">Atelier de couture artisanale — chaque création est pensée, taillée et cousue avec soin pour n'appartenir qu'à vous.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn-primary">Prendre rendez-vous</a>
+    <a href="#realisations" class="btn-secondary">Voir les créations</a>
+  </div>
+  <div class="hero-deco"><div class="hero-deco-inner"></div></div>
+  <div class="thread-line">Lundi – Samedi · Sur rendez-vous</div>
+</section>
+
+<!-- ═══════════════════════════ À PROPOS ═══════════════════════════ -->
+<section id="apropos">
+  <div class="reveal">
+    <div class="section-tag">À propos</div>
+    <h2 class="section-title">Une passion<br><em>cousue main</em></h2>
+    <div class="divider"></div>
+    <p class="apropos-text">Depuis plus de 10 ans, mon atelier est un espace où le tissu prend vie.
+      Chaque cliente est unique, chaque projet est une nouvelle histoire à raconter.
+      Je travaille exclusivement sur mesure, en prenant le temps de comprendre vos envies et de sublimer votre silhouette.
+    </p>
+    <p class="apropos-text" style="margin-top:1rem">Des robes de mariée aux tenues de soirée, en passant par les retouches délicates, chaque point est posé avec précision et amour du détail.</p>
+    <div class="apropos-stats">
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Années d'expérience</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Créations réalisées</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Sur mesure</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-4">
+        <div class="stat-number">★ 5</div>
+        <div class="stat-label">Satisfaction client</div>
+      </div>
+    </div>
+  </div>
+  <div class="apropos-portrait reveal reveal-delay-2">
+    <div class="portrait-icon">✂️</div>
+    <div class="portrait-badge">Couturière passionnée</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MAP ═══════════════════════════ -->
+<div id="map-section">
+  <div class="map-container">
+    <div class="map-info reveal">
+      <div class="section-tag">Localisation</div>
+      <h2 class="section-title">Trouver<br><em>l'atelier</em></h2>
+      <div class="map-details">
+        <div class="map-detail-item">
+          <div class="map-icon">📍</div>
+          <div class="map-detail-text">
+            <strong>Adresse</strong>
+            Votre adresse, Quartier — Casablanca, Maroc
+          </div>
+        </div>
+        <div class="map-detail-item">
+          <div class="map-icon">🕐</div>
+          <div class="map-detail-text">
+            <strong>Horaires d'ouverture</strong>
+            Lun – Ven : 9h00 – 18h30<br>Samedi : 9h00 – 14h00
+          </div>
+        </div>
+        <div class="map-detail-item">
+          <div class="map-icon">📞</div>
+          <div class="map-detail-text">
+            <strong>Téléphone</strong>
+            +212 6XX XXX XXX
+          </div>
+        </div>
+        <div class="map-detail-item">
+          <div class="map-icon">✉️</div>
+          <div class="map-detail-text">
+            <strong>Email</strong>
+            atelier@couture.ma
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-iframe-wrap">
+      <!-- Remplacez les coordonnées par celles de votre atelier -->
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-7.65%2C33.54%2C-7.55%2C33.62&layer=mapnik&marker=33.5731,-7.5898"
+        title="Localisation de l'atelier"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SERVICES ═══════════════════════════ -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-tag reveal">Prestations</div>
+      <h2 class="section-title reveal">Mes <em>services</em></h2>
+    </div>
+    <p style="max-width:280px;font-size:0.85rem;color:var(--gray);font-weight:300;line-height:1.75" class="reveal">
+      Du premier coup de crayon à l'essayage final — chaque création vous ressemble.
+    </p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-number">01</div>
+      <div class="service-name">Robe sur Mesure</div>
+      <p class="service-desc">Chaque robe est créée selon votre morphologie, vos goûts et l'occasion. Du croquis à la dernière couture, un résultat unique.</p>
+      <span class="service-tag">Création ↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-number">02</div>
+      <div class="service-name">Robe de Mariée</div>
+      <p class="service-desc">Le plus beau jour mérite la robe la plus parfaite. Je vous accompagne de la conception jusqu'au dernier essayage avec toute mon attention.</p>
+      <span class="service-tag">Mariage ↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-number">03</div>
+      <div class="service-name">Retouches & Ajustements</div>
+      <p class="service-desc">Vêtement trop grand, trop court ou à moderniser ? Je redonne vie à vos pièces préférées avec précision et soin du détail.</p>
+      <span class="service-tag">Retouche ↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-number">04</div>
+      <div class="service-name">Caftan & Tenue Traditionnelle</div>
+      <p class="service-desc">Des créations qui honorent le savoir-faire marocain tout en s'adaptant à votre style personnel et aux tendances contemporaines.</p>
+      <span class="service-tag">Tradition ↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-number">05</div>
+      <div class="service-name">Tenue de Soirée</div>
+      <p class="service-desc">Pour les grandes occasions, je crée des tenues élégantes et intemporelles qui vous permettront de rayonner en toute confiance.</p>
+      <span class="service-tag">Événement ↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-number">06</div>
+      <div class="service-name">Cours de Couture</div>
+      <p class="service-desc">Partagez ma passion ! Des cours individuels ou en petits groupes pour apprendre les bases ou perfectionner votre technique.</p>
+      <span class="service-tag">Formation ↗</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ RÉALISATIONS ═══════════════════════════ -->
+<section id="realisations">
+  <div class="realisations-header">
+    <div>
+      <div class="section-tag reveal">Portfolio</div>
+      <h2 class="section-title reveal">Mes <em>réalisations</em></h2>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterPortfolio('all',this)">Tout</button>
+      <button class="filter-tab" onclick="filterPortfolio('robe',this)">Robes</button>
+      <button class="filter-tab" onclick="filterPortfolio('mariage',this)">Mariage</button>
+      <button class="filter-tab" onclick="filterPortfolio('traditionnel',this)">Traditionnel</button>
+    </div>
+  </div>
+  <div class="portfolio-grid" id="portfolioGrid">
+    <div class="portfolio-item ph-1" data-cat="mariage">
+      <div class="portfolio-img">🤍</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-title">Robe de Mariée</div>
+        <div class="portfolio-cat">Mariage · Dentelle & Soie</div>
+      </div>
+    </div>
+    <div class="portfolio-item ph-2" data-cat="robe">
+      <div class="portfolio-img">✨</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-title">Robe de Soirée</div>
+        <div class="portfolio-cat">Soirée · Velours</div>
+      </div>
+    </div>
+    <div class="portfolio-item ph-3" data-cat="traditionnel">
+      <div class="portfolio-img">🌿</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-title">Caftan Brodé</div>
+        <div class="portfolio-cat">Traditionnel · Soie</div>
+      </div>
+    </div>
+    <div class="portfolio-item ph-4" data-cat="robe">
+      <div class="portfolio-img">💛</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-title">Robe Cocktail</div>
+        <div class="portfolio-cat">Événement · Satin</div>
+      </div>
+    </div>
+    <div class="portfolio-item ph-5" data-cat="traditionnel">
+      <div class="portfolio-img">🌸</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-title">Takchita Moderne</div>
+        <div class="portfolio-cat">Traditionnel · Organza</div>
+      </div>
+    </div>
+    <div class="portfolio-item ph-1" data-cat="mariage">
+      <div class="portfolio-img">🕊️</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-title">Voile & Accessoires</div>
+        <div class="portfolio-cat">Mariage · Tulle</div>
+      </div>
+    </div>
+    <div class="portfolio-item ph-2" data-cat="robe">
+      <div class="portfolio-img">🌙</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-title">Robe Longue</div>
+        <div class="portfolio-cat">Soirée · Mousseline</div>
+      </div>
+    </div>
+    <div class="portfolio-item ph-3" data-cat="traditionnel">
+      <div class="portfolio-img">🌺</div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-title">Ceinture Brodée</div>
+        <div class="portfolio-cat">Accessoire · Broderie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-tag">Contact</div>
+    <h2 class="contact-info-title">Parlons de<br>votre <em>projet</em></h2>
+    <p style="font-size:0.9rem;color:var(--gray);font-weight:300;line-height:1.8;margin-top:1rem">
+      Vous avez une idée, une occasion spéciale qui approche ? Contactez-moi et ensemble, donnons vie à votre vision.
+    </p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-text"><strong>Adresse</strong><span>Gonzaville(Port-Bouët) , Côte d'Ivoire</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-text"><strong>Téléphone</strong><span>+225 0XX XXX XXX</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-text"><strong>Email</strong><span>atelier@couture.ma</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-text"><strong>Horaires</strong><span>Lun–Ven 9h–18h30 · Sam 9h–14h</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <form class="contact-form" onsubmit="sendMessage(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Prénom</label>
+          <input type="text" placeholder="Votre prénom" required />
+        </div>
+        <div class="form-group">
+          <label>Nom</label>
+          <input type="text" placeholder="Votre nom" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="votre@email.com" required />
+      </div>
+      <div class="form-group">
+        <label>Téléphone</label>
+        <input type="tel" placeholder="+225 0XX XXX XXX" />
+      </div>
+      <div class="form-group">
+        <label>Service souhaité</label>
+        <select>
+          <option value="">— Choisissez un service —</option>
+          <option>Robe sur Mesure</option>
+          <option>Robe de Mariée</option>
+          <option>Retouches & Ajustements</option>
+          <option>Caftan & Tenue Traditionnelle</option>
+          <option>Tenue de Soirée</option>
+          <option>Cours de Couture</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Votre message</label>
+        <textarea rows="4" placeholder="Décrivez votre projet, l'occasion, vos envies..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit" id="submitBtn">Envoyer le message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+    <a href="#accueil" class="nav-logo"><img src="Aurelle_couture.jpeg" class="logo-img"></a>
+  <div class="footer-copy">© 2025 — Tous droits réservés</div>
+  <div class="footer-social">
+    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  </div>
+</footer>
+
+<script>
+  // ── Nav scroll ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── Mobile menu ──
+  function toggleMenu() {
+    const h = document.getElementById('hamburger');
+    const m = document.getElementById('mobileMenu');
+    h.classList.toggle('open');
+    m.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // ── Scroll Reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Portfolio Filter ──
+  function filterPortfolio(cat, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      const match = cat === 'all' || item.dataset.cat === cat;
+      item.style.opacity = match ? '1' : '0.2';
+      item.style.transform = match ? 'scale(1)' : 'scale(0.97)';
+    });
+  }
+
+  // ── Contact Form ──
+  function sendMessage(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Message envoyé ✓';
+    btn.style.background = 'var(--yellow)';
+    btn.style.color = 'var(--black)';
+    setTimeout(() => {
+      btn.textContent = 'Envoyer le message →';
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 3500);
+  }
+</script>
+</body>
+</html>
