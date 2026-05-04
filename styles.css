@@ -336,19 +336,12 @@ footer {
 }
 @media (max-width: 768px) {
   .apropos-portrait {
-    width: 100%; /* Le conteneur prend toute la largeur */
-   
-    aspect-ratio: auto; /* Supprime tout ratio imposé */
-     max-height: 320px; /* Supprime toute limitation de hauteur */
-    overflow: visible; /* Laisse le contenu s'afficher */
-    margin: 0; /* Assure-toi qu'il n'y a pas de marges parasites */
+    aspect-ratio: 3 / 4;      /* portrait vertical — plus de hauteur */
+    max-height: 420px;
+    width: 100%;
   }
   .apropos-portrait img {
-    width: 100%;
-    height: auto; /* L'image garde ses proportions originales */
-    display: block; /* Supprime l'espace sous l'image */
-    object-fit: fill; /* Important: On n'utilise PAS 'contain' ni 'cover', mais laisse l'image se dimensionner naturellement */
-    object-position: center 5%; /* Centre l'image */
+    object-position: center top;  /* colle au sommet = tête visible */
   }
   .nav-links { display: none; }
   .hamburger { display: flex; }
