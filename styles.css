@@ -336,13 +336,16 @@ footer {
 }
 @media (max-width: 768px) {
   .apropos-portrait {
-    aspect-ratio: 5 / 6;      /* portrait vertical — plus de hauteur */
-    max-height: 820px;
     width: 100%;
+    max-height: none; /* On retire la limite de hauteur pour laisser l'image respirer */
+    aspect-ratio: auto; /* Laisse l'image dicter son propre ratio */
+    overflow: hidden;
   }
   .apropos-portrait img {
-     object-fit: contain;       /* affiche TOUTE la photo sans rogner */
-    background: #f5f5f0;
+    width: 100%;
+    height: auto;      /* Force l'image à garder ses proportions réelles */
+    display: block;
+    object-fit: contain; /* Sécurité supplémentaire */
   }
   .nav-links { display: none; }
   .hamburger { display: flex; }
