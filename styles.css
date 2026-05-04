@@ -335,6 +335,14 @@ footer {
   footer { flex-direction: column; gap: 1.5rem; text-align: center; }
 }
 @media (max-width: 768px) {
+  .apropos-portrait {
+    aspect-ratio: 3 / 4;      /* portrait vertical — plus de hauteur */
+    max-height: 420px;
+    width: 100%;
+  }
+  .apropos-portrait img {
+    object-position: center top;  /* colle au sommet = tête visible */
+  }
   .nav-links { display: none; }
   .hamburger { display: flex; }
   .services-grid { grid-template-columns: 1fr; }
