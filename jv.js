@@ -3,6 +3,29 @@ window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const navbar = document.getElementById('navbar');
+  
+  // Cette ligne récupère uniquement le nom du fichier, sans le chemin
+  const page = window.location.pathname.split("/").pop();
+
+  // On vérifie si on est sur l'accueil
+  // (Le "" gère le cas où Vercel affiche l'URL sans ".html")
+  const isHome = page === "" || page === "index.html" || page === "index";
+
+  if (!isHome) {
+    // Force le style noir sur les autres pages
+    navbar.classList.add('static-nav');
+  } else {
+    // Garde l'effet de scroll uniquement pour l'accueil
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  }
+});
+
+
 // ═══════════════ MENU HAMBURGER ═══════════════
 function toggleMenu() {
   const h = document.getElementById('hamburger');
