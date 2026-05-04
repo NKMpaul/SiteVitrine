@@ -339,7 +339,7 @@ footer {
     width: 100%; /* Le conteneur prend toute la largeur */
     height: auto; /* IMPORTANTS: La hauteur s'adapte automatiquement */
     aspect-ratio: auto; /* Supprime tout ratio imposé */
-    max-height: none; /* Supprime toute limitation de hauteur */
+     max-height: 320px; /* Supprime toute limitation de hauteur */
     overflow: visible; /* Laisse le contenu s'afficher */
     margin: 0; /* Assure-toi qu'il n'y a pas de marges parasites */
   }
@@ -348,7 +348,7 @@ footer {
     height: auto; /* L'image garde ses proportions originales */
     display: block; /* Supprime l'espace sous l'image */
     object-fit: fill; /* Important: On n'utilise PAS 'contain' ni 'cover', mais laisse l'image se dimensionner naturellement */
-    object-position: center center; /* Centre l'image */
+    object-position: center 5%; /* Centre l'image */
   }
   .nav-links { display: none; }
   .hamburger { display: flex; }
