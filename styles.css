@@ -176,7 +176,7 @@ section { padding: 7rem 4rem; }
   position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
 .apropos-portrait::before { content: ''; position: absolute; inset: 20px; border: 1px solid rgba(245,200,66,0.15); }
-.portrait-icon { font-size: 5rem; opacity: 0.12; }
+.portrait-icon { font-size: 5rem; opacity: 0.50; }
 .portrait-badge {
   position: absolute; bottom: 2rem; right: -1rem;
   background: var(--yellow); color: var(--black);
