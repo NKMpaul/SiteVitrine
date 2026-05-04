@@ -336,7 +336,7 @@ footer {
 }
 @media (max-width: 768px) {
   .apropos-portrait {
-    aspect-ratio: 3 / 4;      /* portrait vertical — plus de hauteur */
+    aspect-ratio: 2 / 3;      /* portrait vertical — plus de hauteur */
     width: 100%;
     overflow: hidden; 
     position: relative;
