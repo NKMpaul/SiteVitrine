@@ -342,6 +342,8 @@ footer {
   }
   .apropos-portrait img {
     object-position: center top;  /* colle au sommet = tête visible */
+     object-fit: contain;       /* affiche TOUTE la photo sans rogner */
+    background: #f5f5f0;
   }
   .nav-links { display: none; }
   .hamburger { display: flex; }
