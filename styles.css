@@ -340,7 +340,6 @@ footer {
     /* On garde un ratio vertical pour que la photo soit grande */
     aspect-ratio: 4 / 5; 
     overflow: hidden;
-    border-radius: 8px; /* Optionnel : pour adoucir les angles comme sur ton screen */
   }
   .apropos-portrait img {
     width: 100%;
@@ -349,7 +348,7 @@ footer {
     object-fit: cover; 
     
     /* On ajuste la position pour ne pas couper la tête */
-    object-position: center 10%; 
+    object-position: center 20%; 
   }
   .nav-links { display: none; }
   .hamburger { display: flex; }
