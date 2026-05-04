@@ -337,11 +337,16 @@ footer {
 @media (max-width: 768px) {
   .apropos-portrait {
     aspect-ratio: 3 / 4;      /* portrait vertical — plus de hauteur */
-    max-height: 420px;
     width: 100%;
+    overflow: hidden; 
+    position: relative;
   }
   .apropos-portrait img {
     object-position: center top;  /* colle au sommet = tête visible */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
   }
   .nav-links { display: none; }
   .hamburger { display: flex; }
