@@ -337,7 +337,7 @@ footer {
 @media (max-width: 768px) {
   .apropos-portrait {
     width: 100%; /* Le conteneur prend toute la largeur */
-    height: auto; /* IMPORTANTS: La hauteur s'adapte automatiquement */
+   
     aspect-ratio: auto; /* Supprime tout ratio imposé */
      max-height: 320px; /* Supprime toute limitation de hauteur */
     overflow: visible; /* Laisse le contenu s'afficher */
